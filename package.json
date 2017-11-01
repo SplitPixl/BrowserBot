@@ -1,0 +1,28 @@
+{
+  "name": "browserbot",
+  "version": "0.0.1",
+  "description": "A bot that runs in-browser.",
+  "main": "main.js",
+  "dependencies": {
+    "eris": "^0.8.1",
+    "net": "^1.0.2",
+    "node-telegram-bot-api": "^0.29.0",
+    "tls": "^0.0.1",
+    "tunnel-agent": "^0.6.0",
+    "webpack": "^3.8.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SplitPixl/BrowserBot.git"
+  },
+  "author": "SplitPixl & LivingAutoMode",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SplitPixl/BrowserBot/issues"
+  },
+  "homepage": "https://github.com/SplitPixl/BrowserBot#readme"
+}

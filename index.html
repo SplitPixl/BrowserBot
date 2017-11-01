@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Test</title>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <style>
+#status {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#logs {
+  padding: 6px;
+  font-family: monospace;
+  color: white;
+  background-color: black;
+}
+
+.bad {
+  color: #f00;
+}
+
+.maybe {
+  color: #dd0;
+}
+
+.good {
+  color: #0f0;
+}
+
+.telegram {
+  color: #0088cc;
+}
+
+.telegram::before {
+  content: 'TG> ';
+  color: #0088cc;
+}
+
+.discord {
+  color: #7289DA;
+}
+
+.discord::before {
+  content: 'DC> ';
+  color: #7289DA;
+}
+
+.hidden {
+  display: none;
+}
+
+.cmdide {
+  position: absolute;
+  top:0;
+  left:0;
+  z-index: 20;
+  width: 100%;
+  height: 100%;
+  background: #333;
+}
+  </style>
+</head>
+<body>
+  <nav class="cyan" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="#" class="brand-logo">Logo</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="section">
+
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">API Credentials</span>
+              <label for="ttoken">Telegram API Token</label>
+              <input id="ttoken" type="password" placeholder="Telegram" onchange="updateTokens()"></input>
+              <label for="dtoken">Discord Bot Token</label>
+              <input id="dtoken" type="password" placeholder="Discord" onchange="updateTokens()"></input>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">Status</span>
+              <div id="status">
+                <div>Telegram: <span id="tstatus" class="bad">Disconnected.</span></div>
+                <div>Discord: <span id="dstatus" class="bad">Disconnected.</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">Logs</span>
+              <div id="logs">
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">Control</span>
+              <a id="start" href="#" class="btn green">start</a>
+              <a id="stop" href="#" class="btn red hidden">stop</a>
+              <button onclick="setup()">Add echo command</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">Command IDE</span>
+              <a href="#" class="btn cmdidebtn">Open command IDE</a>
+            </div>
+          </div>
+        </div>
+
+    </div>
+  </div>
+
+  <div class="cmdide hidden">
+    Command IDE
+  </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<script src="bundle.js"></script>
+<script>
+function setup () {
+  localStorage.commands = JSON.stringify({
+    echo: {
+      code: "done(msg.args.join(' '))"
+    },
+    reverse: {
+      code: "done(msg.args.join(' ').split('').reverse().join(''))"
+    },
+    cat: {
+      code: "fetch('https://random.cat/meow').then(r => {return r.json()}).then(res => {done('meow! ' + res.file)})"
+    },
+  })
+}
+function updateTokens() {
+  let tokens = localStorage.tokens ? JSON.parse(localStorage.tokens) : {}
+  tokens.discord = document.getElementById('dtoken').value;
+  tokens.telegram = document.getElementById('ttoken').value;
+  localStorage.tokens = JSON.stringify(tokens)
+}
+
+if (localStorage.tokens) {
+  let tokens = JSON.parse(localStorage.tokens);
+  document.getElementById('dtoken').value = tokens.discord;
+  document.getElementById('ttoken').value = tokens.telegram;
+}
+</script>
+</html>

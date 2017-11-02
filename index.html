@@ -5,6 +5,14 @@
   <title>Test</title>
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/codemirror.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/mode/javascript/javascript.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/mode/simple.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/edit/matchbrackets.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/codemirror.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/theme/material.css" />
+
   <style>
 #status {
   display: flex;
@@ -61,6 +69,63 @@
   width: 100%;
   height: 100%;
   background: #333;
+  display: flex;
+  flex-direction: column;
+}
+
+.idewrap {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.menubar {
+  background-color: #222;
+}
+
+.cmdide.hidden {
+  display: none;
+}
+
+.idewrap .cmds {
+  width: 300px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.idewrap .ide {
+  width: 100%;
+  height: 100%;
+  background-color: #263238;
+  font-family: monospace;
+}
+
+cmdide .cmdidebtn {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+}
+
+.cmds .cmd {
+  color: #fff;
+  padding: 12px;
+}
+
+.cmds .cmd:hover {
+  color: #fff;
+  padding: 12px;
+  background-color: #383838;
+}
+
+.cmds .cmd.selected {
+  color: #fff;
+  padding: 12px;
+  background-color: #263238;
+}
+
+.CodeMirror {
+  height: 100%;
 }
   </style>
 </head>
@@ -122,7 +187,7 @@
               <span class="card-title">Control</span>
               <a id="start" href="#" class="btn green">start</a>
               <a id="stop" href="#" class="btn red hidden">stop</a>
-              <button onclick="setup()">Add echo command</button>
+              <!-- <button onclick="setup()">Add echo command</button> -->
             </div>
           </div>
           <div class="card">
@@ -137,26 +202,19 @@
   </div>
 
   <div class="cmdide hidden">
-    Command IDE
+    <div class="menubar">
+      <a class="red-text btn-flat cmdidebtn">Close</a>
+    </div>
+    <div class="idewrap">
+      <div class="cmds"></div>
+      <div class="ide"></div>
+    </div>
   </div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 <script src="bundle.js"></script>
 <script>
-function setup () {
-  localStorage.commands = JSON.stringify({
-    echo: {
-      code: "done(msg.args.join(' '))"
-    },
-    reverse: {
-      code: "done(msg.args.join(' ').split('').reverse().join(''))"
-    },
-    cat: {
-      code: "fetch('https://random.cat/meow').then(r => {return r.json()}).then(res => {done('meow! ' + res.file)})"
-    },
-  })
-}
 function updateTokens() {
   let tokens = localStorage.tokens ? JSON.parse(localStorage.tokens) : {}
   tokens.discord = document.getElementById('dtoken').value;

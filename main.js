@@ -1,9 +1,18 @@
 const webRequire = require('./utils/webrequire.js')
 
-let commands = localStorage.commands ? JSON.parse(localStorage.commands) : {}
+let commands
 let bots = {}
 
+if (localStorage.commands) {
+  commands = JSON.parse(localStorage.commands)
+} else {
+  localStorage.commands = JSON.stringify({echo: {code: "reply(msg.args.join(' '))"},reverse: {code: "reply(msg.args.join(' ').split('').reverse().join(''))"},cat: {code: "fetch('https://random.cat/meow').then(r => {return r.json()}).then(res => {reply('meow! ' + res.file)})"}})
+  commands = JSON.parse(localStorage.commands)
+}
+
 global.logger = require('./utils/logger.js')
+
+require('./utils/cmdide.js')
 
 function startBots() {
   let tokens = localStorage.tokens ? JSON.parse(localStorage.tokens) : {}
@@ -23,7 +32,7 @@ function commandHandler(msg, callback) {
   if (commandList[msg.command.toLowerCase()]) {
     logger.logCmd(msg);
     try{
-      eval(`(msg, bots, require, done) => {${commandList[msg.command.toLowerCase()].code}}`)(msg, bots, webRequire, (text) => { // TODO: Make a webrequire module
+      eval(`(msg, bots, require, reply) => {${commandList[msg.command.toLowerCase()].code}}`)(msg, bots, webRequire, (text) => { // TODO: Make a webrequire module
         callback(text);
       });
     } catch (err) {
@@ -43,6 +52,6 @@ function cmdIde() {
 }
 
 document.getElementById("start").addEventListener('click', startBots)
-document.querySelector(".cmdidebtn").forEach(b => {
+document.querySelectorAll(".cmdidebtn").forEach(b => {
   b.addEventListener('click', cmdIde)
 });

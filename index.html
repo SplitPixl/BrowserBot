@@ -107,21 +107,28 @@ cmdide .cmdidebtn {
   left: 50px;
 }
 
-.cmds .cmd {
+.cmds .cmd-wrap {
   color: #fff;
   padding: 12px;
+  display: flex;
+  justify-content: center;
 }
 
-.cmds .cmd:hover {
+.cmds .cmd-wrap:hover {
   color: #fff;
   padding: 12px;
   background-color: #383838;
 }
 
-.cmds .cmd.selected {
+.cmds .cmd-wrap.selected {
   color: #fff;
   padding: 12px;
   background-color: #263238;
+}
+
+.cmd {
+  color: #fff;
+  width: 100%;
 }
 
 .CodeMirror {
@@ -203,11 +210,21 @@ cmdide .cmdidebtn {
 
   <div class="cmdide hidden">
     <div class="menubar">
-      <a class="red-text btn-flat cmdidebtn">Close</a>
+      <a class="red-text btn-flat cmdidebtn">Close</a> <a class="white-text btn-flat newcmdbtn">New</a>
     </div>
     <div class="idewrap">
       <div class="cmds"></div>
       <div class="ide"></div>
+    </div>
+  </div>
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>New Command</h4>
+      <input class="newcmdname" type="text" placeholder="coolname">
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Cancel</a>
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat createcmdbtn">Create</a>
     </div>
   </div>
 </body>

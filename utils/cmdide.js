@@ -64,6 +64,7 @@ document.querySelector('.newcmdbtn').addEventListener('click', function () {
 })
 
 document.querySelector('.createcmdbtn').addEventListener('click', function () {
+  let commands = localStorage.commands ? JSON.parse(localStorage.commands) : {}
   let label = document.querySelector('.newcmdname').value
   if (label) {
     commands[label] = {code: ''};

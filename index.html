@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <title>BrowserBot</title>
-  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/codemirror.js"></script>
@@ -12,6 +11,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/edit/matchbrackets.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/codemirror.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/theme/material.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <nav class="cyan" role="navigation">
@@ -41,6 +41,14 @@
               <input id="ttoken" type="password" placeholder="Telegram" onchange="updateTokens()"></input>
               <label for="dtoken">Discord Bot Token</label>
               <input id="dtoken" type="password" placeholder="Discord" onchange="updateTokens()"></input>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">Options</span>
+              <label for="prefix">Prefix</label>
+              <input id="prefix" type="text" placeholder="/" onchange="updateOpts()"></input>
+              <p class="info-notice grey-text">This will only be used on platforms without a set bot prefix.</p>
             </div>
           </div>
         </div>
@@ -116,10 +124,18 @@ function updateTokens() {
   localStorage.tokens = JSON.stringify(tokens)
 }
 
+function updateOpts() {
+  let options = JSON.parse(localStorage.options)
+  options.prefix = document.getElementById('prefix').value;
+  localStorage.options = JSON.stringify(options)
+}
+
 if (localStorage.tokens) {
   let tokens = JSON.parse(localStorage.tokens);
+  let options = JSON.parse(localStorage.options)
   document.getElementById('dtoken').value = tokens.discord;
   document.getElementById('ttoken').value = tokens.telegram;
+  document.getElementById('prefix').value = options.prefix
 }
 </script>
 </html>

@@ -69,6 +69,7 @@
   background: #333;
   display: flex;
   flex-direction: column;
+  transition: transform 0.5s;
 }
 
 .idewrap {
@@ -82,7 +83,7 @@
 }
 
 .cmdide.hidden {
-  display: none;
+  transform: translateY(-100%);
 }
 
 .idewrap .cmds {
@@ -131,4 +132,9 @@ cmdide .cmdidebtn {
 
 .CodeMirror {
   height: 100%;
+}
+
+.info-notice {
+  color: #888;
+  font-size: 10px;
 }

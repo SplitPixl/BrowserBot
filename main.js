@@ -10,6 +10,10 @@ if (localStorage.commands) {
   commands = JSON.parse(localStorage.commands)
 }
 
+if (!localStorage.options) {
+  localStorage.options = JSON.stringify({})
+}
+
 global.logger = require('./utils/logger.js')
 
 require('./utils/cmdide.js')

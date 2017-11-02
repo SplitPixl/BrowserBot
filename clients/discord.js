@@ -9,7 +9,7 @@ module.exports = function (command) {
     logger.log('Started Discord!')
   });
   bot.on('messageCreate', (msg) => {
-    if (msg.content.startsWith(/*JSON.parse(localStorage.options).prefix ||*/ '/')) {
+    if (msg.content.startsWith(JSON.parse(localStorage.options).prefix || '/')) {
       let cmd = msg.content.split(' ');
       let args = cmd.slice(1);
       let msgFormatted = {
@@ -20,7 +20,7 @@ module.exports = function (command) {
         sender: {
           name: `@${msg.author.username}#${msg.author.discriminator}`
         },
-        command: cmd[0].replace(/*JSON.parse(localStorage.options).prefix*/ '/', ''),
+        command: cmd[0].replace(JSON.parse(localStorage.options).prefix || '/', ''),
         args: args,
         text: msg.content
       }

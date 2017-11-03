@@ -59,3 +59,5 @@ document.getElementById("start").addEventListener('click', startBots)
 document.querySelectorAll(".cmdidebtn").forEach(b => {
   b.addEventListener('click', cmdIde)
 });
+
+document.querySelector('.exportbtn').addEventListener('click', require('./utils/export.js'))

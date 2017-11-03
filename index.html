@@ -9,6 +9,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/mode/javascript/javascript.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/mode/simple.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/edit/matchbrackets.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.4/jszip.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/codemirror.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/theme/material.css" />
   <link rel="stylesheet" href="style.css">
@@ -67,7 +68,7 @@
             <div class="card-content">
               <span class="card-title">Logs</span>
               <div id="logs">
-
+                [No logs yet.]
               </div>
             </div>
           </div>
@@ -86,6 +87,13 @@
             <div class="card-content">
               <span class="card-title">Command IDE</span>
               <a href="#" class="btn cmdidebtn">Open command IDE</a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">Export</span>
+              <p class="info-notice grey-text">This will give you a zip file with all the bot commands and tokens to be run on a server.</p>
+              <a href="#" class="btn exportbtn">Export</a>
             </div>
           </div>
         </div>

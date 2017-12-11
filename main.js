@@ -40,12 +40,9 @@ function commandHandler(msg, callback) {
         callback(text);
       });
     } catch (err) {
-      console.log(err);
-      logs.push({
-        type: 'error',
-        from: 'command',
-        text: err.message
-      })
+      err.cmd = msg.command.toLowerCase() + ' cmd'
+      logger.error(err)
+      console.error(err)
     }
   }
 }

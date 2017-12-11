@@ -55,6 +55,10 @@
   color: #7289DA;
 }
 
+.err {
+  color: #f00;
+}
+
 .hidden {
   display: none;
 }
